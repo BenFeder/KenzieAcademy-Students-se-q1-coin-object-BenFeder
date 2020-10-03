@@ -3,7 +3,7 @@ const coin = {
   flip: function () {
     // 1. Randomly set your coin object's "state" property to be either
     //    0 or 1: use "this.state" to access the "state" property on this object.
-    this.state = math.floor(math.random() * 2);
+    this.state = Math.floor(Math.random() * 2);
     return this.state;
   },
   toString: function () {
@@ -26,8 +26,8 @@ const coin = {
     } else if (this.state == 1) {
       image.src = "images/coinHeads.jpg";
     }
-    image.style.height = "25px";
-    image.style.width = "25px";
+    image.style.height = "50px";
+    image.style.width = "50px";
 
     //    Note that you will need to download or create images to use to display face-up or face-down coins for the toHTML method.
     //    Create a folder directory named images in your repository to hold them.
@@ -39,10 +39,12 @@ function display20Flips() {
   const results = [];
   // 4. Use a loop to flip the coin 20 times, each time displaying the result of the flip as a string on the page.  After your loop completes, return an array with the result of each flip.
   for (let flipNum = 1; flipNum <= 20; flipNum++) {
-    let result = coin.flip().toString();
+    coin.flip();
+    result = coin.toString();
 
     let displayCurrentResult = document.createElement("div");
-    displayCurrentResult.innerHTML = result;
+    displayCurrentResult.innerText = result;
+    document.body.append(displayCurrentResult);
 
     results.push(result);
   }
@@ -55,11 +57,15 @@ function display20Images() {
   const results = [];
   // 5. Use a loop to flip the coin 20 times, and display the results of each flip as an image on the page.  After your loop completes, return an array with result of each flip.
   for (let flipNum = 1; flipNum <= 20; flipNum++) {
-    let result = coin.flip();
+    coin.flip();
+    result = coin.toHTML();
 
-    document.body.append(coin.toHTML());
+    let displaySection = document.createElement("div");
+    displaySection.append(result);
 
-    results.push(result.toString());
+    document.body.append(displaySection);
+
+    results.push(coin.toString());
   }
   let displayResults = JSON.stringify(results);
   document.body.append(displayResults);
